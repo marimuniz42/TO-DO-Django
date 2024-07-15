@@ -10,6 +10,10 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # Em resumo, você verá os outputs do Python em tempo real.
 ENV PYTHONUNBUFFERED 1
 
+# Instalar dependências do sistema necessárias para compilar psycopg2
+RUN apk update && \
+    apk add --no-cache postgresql-dev gcc python3-dev musl-dev
+
 # Copia a pasta "todo" e "scripts" para dentro do container.
 COPY todo /todo
 COPY scripts /scripts
