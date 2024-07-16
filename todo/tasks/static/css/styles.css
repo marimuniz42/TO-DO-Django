@@ -221,3 +221,43 @@ ul.messages li {
     margin-top: 30px;
     text-align: center;
 }
+
+/* Usuários */
+
+.user-list {
+    padding-left: 0;
+}
+
+.user-item {
+    list-style: none;
+    font-size: 20px;
+    height: 50px;
+    padding: 0 15px;
+    padding-top: 10px;
+    border-bottom: 1px dashed #ccc;
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group-text {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.input-group-text i {
+    color: #fff;
+}
+
+.form-control {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+

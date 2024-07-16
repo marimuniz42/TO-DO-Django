@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Usuários{% endblock %}
+
+{% block content %}
+<div class="offset-1 col-10 list-div">
+    <h1>Lista de Usuários</h1>
+    <div class="col-9 search-div">
+        <form method="GET" id="search-form" class="input-group">
+            <input class="form-control" type="text" id="search" name="search" placeholder="Digite o nome do usuário para buscar" value="{{ request.GET.search }}">
+            <i class="fas fa-search" id="search-btn"></i>
+        </form>
+    </div>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <ul class="user-list">
+        {% if users %}
+            {% for user in users %}
+                <li class="user-item">
+                    <span>{{ user.username }}</span>
+                    <span>{{ user.email }}</span>
+                </li>
+            {% endfor %}
+        {% else %}
+            <li class="user-item">
+                <span>Nenhum usuário encontrado.</span>
+            </li>
+        {% endif %}
+    </ul>
+    <div class="pagination">
+        <span class="step-links">
+            {% if users.has_previous %}
+                <a href="?search={{ request.GET.search }}&page={{ users.previous_page_number }}"><i class="fas fa-arrow-left"></i></a>
+            {% endif %}
+
+            {% if users.paginator.num_pages %}
+            <span class="current">
+                {{ users.number }} de {{ users.paginator.num_pages }}
+            </span>
+            {% endif %}
+
+            {% if users.has_next %}
+                <a href="?search={{ request.GET.search }}&page={{ users.next_page_number }}"><i class="fas fa-arrow-right"></i></a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endblock %}

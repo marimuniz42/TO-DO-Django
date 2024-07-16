@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from .forms import TaskForm
@@ -95,6 +96,22 @@ def changeStatus(request, id):
     task.save()
 
     return redirect('/')
+
+@login_required
+def usuarios(request):
+    search_query = request.GET.get('search', '')
+    
+    user_list = User.objects.all()
+    
+    if search_query:
+        user_list = user_list.filter(username__icontains=search_query)
+    
+    paginator = Paginator(user_list, 10)
+
+    page_number = request.GET.get('page')
+    users = paginator.get_page(page_number)
+    
+    return render(request, 'tasks/usuarios.html', {'users': users, 'search_query': search_query})
 
 def helloWorld(request):
     return HttpResponse('Hello World!')
