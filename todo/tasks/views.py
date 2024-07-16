@@ -113,6 +113,9 @@ def usuarios(request):
     
     return render(request, 'tasks/usuarios.html', {'users': users, 'search_query': search_query})
 
+def sobre(request):
+    return render(request, 'tasks/sobre.html')
+
 def helloWorld(request):
     return HttpResponse('Hello World!')
 
